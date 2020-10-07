@@ -1,0 +1,45 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Fira Sans", "Trebuchet MS", "Arial", sans-serif;
+    min-height: 100vh;
+    background-color: #2854a1;
+    color: #dfdfdf;
+}
+
+body,
+#root {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.message,
+.info {
+    text-align: center;
+}

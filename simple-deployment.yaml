@@ -1,0 +1,51 @@
+# simple-node.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: simple-node-app
+  namespace: simple-node
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: simple-node-app
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-node-app
+  namespace: simple-node
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-node-app
+  template:
+    metadata:
+      labels:
+        app: simple-node-app
+    spec:
+      containers:
+      - name: simple-node
+        image: vampaerr/simple-node:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Never
+        env:
+        - name: APP_URI
+          valueFrom:
+            secretKeyRef:
+              name: simple-secret
+              key: uri
+        - name: APP_NAME
+          valueFrom:
+            secretKeyRef:
+              name: simple-secret
+              key: name
+        - name: APP_MESSAGE
+          valueFrom:
+            secretKeyRef:
+              name: simple-secret
+              key: message
